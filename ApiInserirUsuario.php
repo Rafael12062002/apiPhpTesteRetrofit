@@ -1,13 +1,21 @@
 oi
 <?php
 
+include "./connectdb.php";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-type: application/json');
 
     //Recuperar dados necessários
 
-    $Email = mysqli_real_escape_string($conn, $_POST['Email']);
-    $Senha = mysqli_real_escape_string($conn, $_POST['Senha']);
+    $json = file_get_contents("php://input");
+
+    $data = json_decode($json);
+
+    $Email = $data->Email;
+    $Senha = $data->Senha;
+
+
     //$api_token = $_POST['api_token'];
     
     $headers = getallheaders();
